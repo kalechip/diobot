@@ -25,7 +25,7 @@ fs.readdir('./events/', (err,files) => {
 	files.forEach(file => {
 		let func = require(`./events/${file}`)
 		let name = file.split('.')[0]
-		client.on(name, (...args) => func.run(bot, ...args))
+		bot.on(name, (...args) => func.run(bot, ...args))
 	})
 })
 
@@ -35,8 +35,10 @@ bot.on("message", msg => {
 	let command = args.shift().slice(config.prefix.length);
 	try {
 		let cmdFile = require(`./commands/${command}.js`);
-		cmdFile.run(client, msg, args);
+		cmdFile.run(bot, msg, args);
 	} catch (err) {
 		console.error(err);
 	}
 });
+
+bot.login(config.token)
