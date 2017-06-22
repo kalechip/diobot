@@ -31,7 +31,7 @@ fs.readdir('./events/', (err,files) => {
 
 bot.on("message", msg => {
 	if (msg.author.bot || !msg.content.startsWith(config.prefix)) return;
-	let args = message.content.split(" ");
+	let args = msg.content.split(" ");
 	let command = args.shift().slice(config.prefix.length);
 	try {
 		let cmdFile = require(`./commands/${command}.js`);
